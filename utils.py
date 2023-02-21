@@ -32,6 +32,8 @@ def low_pass_filter(p,q,r):
     r = r_unit*real_mag
     return p,q,r
 
+def convert_float(item):
+    return float(re.findall(r"[+-]? *(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?", item)[0])
 
 def orientation(p,q,r,dt):
     phi = p*dt
@@ -71,7 +73,7 @@ def plotter(f_out,m_out,df,disp=True,save=True):
         p.append(m_out[0][i][3])
         q.append(m_out[0][i][4])
         r.append(m_out[0][i][5])
-        temps.append(float(re.findall(r"[+-]? *(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?", df.iloc[i][7])[0]))
+        temps.append(convert_float(df.iloc[i][7]))
     x = np.asarray(x)
     y = np.asarray(y)
     z = np.asarray(z)

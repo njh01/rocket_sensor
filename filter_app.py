@@ -17,10 +17,10 @@ gravity = 9.81 # as measured
 
 def main():
     df = pd.read_csv(filename,header=None)
-    dt = float(re.findall(r"[+-]? *(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?", df.iloc[0][8])[0])
+    dt = utils.convert_float(df.iloc[0][8])
     kf = Filter(debug=False)
     for i in range(len(df)):
-        ax = float(re.findall(r"[+-]? *(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?", df.iloc[i][1])[0])
+        ax = utils.convert_float(df.iloc[i][1])
         ax *= gravity
         ay = df.iloc[i][2]
         ay *= gravity
