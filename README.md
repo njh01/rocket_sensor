@@ -13,6 +13,9 @@ A rotation matrix class for translating body coordinates of an IMU into the refe
 
 Uploaded .csv files contain real imu data. 
 
+format:
+`[step [ax ay az p q r temp] dt]` 
+
 `data_store.csv` contains stationary IMU data for calibration
 
 `data_store_1_maneuver.csv` contains IMU data for a sensor that was lifted up about 25 cm for a few second then returned to the table
