@@ -91,9 +91,9 @@ class Filter:
 
     def rmat(self):
         # self.Rk[2][2] = 0.2
-        self.Rk[3][3] = 0.5
-        self.Rk[4][4] = 0.5
-        self.Rk[5][5] = 0.5
+        self.Rk[3][3] = 15.0
+        self.Rk[4][4] = 15.0
+        self.Rk[5][5] = -15.0
         if self.debug:
             print("Rk: ",self.Rk)
     

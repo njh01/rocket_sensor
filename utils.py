@@ -1,8 +1,18 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import re
+from tkinter import filedialog
 
 gravity = 9.81
+
+def browseFiles():
+    filename = filedialog.askopenfilename(initialdir = "./",
+                                          title = "Select a File",
+                                          filetypes = (("CSV files",
+                                                        "*.csv*"),
+                                                       ("all files",
+                                                        "*.*")))
+    return filename
 
 def vector_magnitude(a1,a2,a3):
     magnitude = np.sqrt(a1**2+a2**2+a3**2)
@@ -98,9 +108,9 @@ def plotter(f_out,m_out,df,disp=True,save=True):
     plt.ylabel("Position, m")
     plt.legend(loc="upper left")
     plt.subplot(2,1,2)
-    plt.plot(time,phi,label="phi")
-    plt.plot(time,theta,label="theta")
-    plt.plot(time,psi,label="psi")
+    plt.plot(time,phi,label="$\Phi$")
+    plt.plot(time,theta,label="$\Theta$")
+    plt.plot(time,psi,label="$\Psi$")
     plt.title("Heading Estimate")
     plt.xlabel("Time, s")
     plt.ylabel("Heading, deg")
@@ -110,9 +120,9 @@ def plotter(f_out,m_out,df,disp=True,save=True):
 
     plt.figure("Measurements",figsize=(9,9))
     plt.subplot(2,1,1)
-    plt.plot(time,ax,label="ax")
-    plt.plot(time,ay,label="ay")
-    plt.plot(time,az,label="az")
+    plt.plot(time,ax,label="$a_{x}$")
+    plt.plot(time,ay,label="$a_{y}$")
+    plt.plot(time,az,label="$a_{z}$")
     plt.title("Acceleration input")
     plt.xlabel("Time, s")
     plt.ylabel("Acceleration, m/s/s")
@@ -131,15 +141,15 @@ def plotter(f_out,m_out,df,disp=True,save=True):
     fs = np.round(temp_conversion(temps),3)
     temps = np.round(temps,3)
     avg_temp = np.round(np.mean(temps),1)
-    avg_tempf = temp_conversion(avg_temp)
+    avg_tempf = np.round(temp_conversion(avg_temp),1)
     figs,ax1=plt.subplots(figsize=(6,6))
     ax2 = ax1.twinx()
     ax1.plot(time,temps,label="celcius,avg="+str(avg_temp),color="firebrick")
     ax2.plot(time,fs,label="fahrenheit,avg="+str(avg_tempf),color="royalblue")
     ax1.set_title("Temperature")
     ax1.set_xlabel("Time, s")
-    ax1.set_ylabel("Temperature, C")
-    ax2.set_ylabel("Temperature, F")
+    ax1.set_ylabel("Temperature, $^{\circ}$C")
+    ax2.set_ylabel("Temperature, $^{\circ}$F")
     ax1.legend(loc = "upper left")
     ax2.legend(loc = "lower right")
     if save:

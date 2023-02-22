@@ -1,21 +1,15 @@
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import pdb
-import re
 import warnings
 warnings.filterwarnings('ignore')
 import utils
 from kfilter import Filter
 from dcm import direction_cosine_matrix as dcm 
 
-filename = "data_store.csv"
-filename = "data_store_1_maneuver.csv"
-filename = "data_store_turn90.csv"
-filename = "data_store_outdoor_temps.csv"
-gravity = 9.81 # as measured
+gravity = 9.81
 
 def main():
+    filename = utils.browseFiles()
     df = pd.read_csv(filename,header=None)
     dt = utils.convert_float(df.iloc[0][8])
     kf = Filter(debug=False)
@@ -30,7 +24,7 @@ def main():
         p = df.iloc[i][4]
         q = df.iloc[i][5]
         r = df.iloc[i][6]
-        p,q,r = utils.low_pass_filter(p,q,r)
+        # p,q,r = utils.low_pass_filter(p,q,r)
         ########################################################################
         # convert from IMU body to reference 
         phi,theta,psi = utils.orientation(p,q,r,dt)
